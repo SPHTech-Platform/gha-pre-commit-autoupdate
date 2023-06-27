@@ -1,0 +1,1 @@
+# gha-pre-commit-autoupdate
