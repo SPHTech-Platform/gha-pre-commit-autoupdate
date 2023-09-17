@@ -3,7 +3,7 @@ description: "Run pre-commit autoupdate to update pre-commit config versions"
 
 inputs:
   GITHUB_TOKEN:
-    description: "Milti-line list of secrets to expose to the build"
+    description: "Muilti-line list of secrets to expose to the build"
     required: false
     default: ""
 
