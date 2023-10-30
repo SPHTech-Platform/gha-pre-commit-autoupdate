@@ -13,3 +13,9 @@ steps:
     with:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+# Important note
+
+For this to work, Github Org admins must allow Github Actions to make PR requests.
+
+You can find it under Settings > Actions > General from the Organization page.
