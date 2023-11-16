@@ -34,9 +34,9 @@ runs:
         commit-message: "chore: update pre-commit hooks"
         body: Update versions of pre-commit hooks to latest version.
 
-     - name: Close and reopen PR for CI check trigger
-       if: ${{ steps.cpr.outputs.pull-request-number }}
-       run: |
-         gh pr close ${{ steps.cpr.outputs.pull-request-number }}
-         gh pr reopen ${{ steps.cpr.outputs.pull-request-number }}
+    - name: Close and reopen PR for CI check trigger
+      if: ${{ steps.cpr.outputs.pull-request-number }}
+      run: |
+        gh pr close ${{ steps.cpr.outputs.pull-request-number }}
+        gh pr reopen ${{ steps.cpr.outputs.pull-request-number }}
 
