@@ -26,4 +26,4 @@ runs:
         branch: update/pre-commit-hooks
         title: Update pre-commit hooks
         commit-message: "chore: update pre-commit hooks"
-        body: Update versions of pre-commit hooks to latest version.
+        body: "Update versions of pre-commit hooks to latest version. Please close and open PR manually to trigger CI checks."
