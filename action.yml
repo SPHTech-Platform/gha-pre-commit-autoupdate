@@ -41,7 +41,7 @@ runs:
         git push origin update/pre-commit-hooks-${sgt_datetime}
         gh pr create --base "main" \
         --title "Test" \
-        --body "sample pr trigger" \ 
+        --body "sample pr trigger" 
 
         
 
