@@ -35,6 +35,7 @@ runs:
         git checkout -b update/pre-commit-hooks
         git add .
         git commit -m "chore: update pre-commit hooks"
+        git push origin update/pre-commit-hooks
         gh pr create -f
 
     # - uses: peter-evans/create-pull-request@v5
