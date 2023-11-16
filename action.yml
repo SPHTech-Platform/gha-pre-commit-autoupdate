@@ -25,30 +25,18 @@ runs:
         pip install pre-commit
         pre-commit autoupdate
 
-    - name: Create PR with gh cli
-      shell: bash
-      env:
-        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-      run: |
-        utc_datetime=$(date +'%Y%m%d-%H%M%S')
-        sgt_datetime=$(date -d "${utc_datetime} UTC" +"%Y%m%d-%H%M%S" --date='+8 hours')
-        git config --global user.email "<>"
-        git config --global user.name "GitHub Actions Bot"
-        git pull
-        git checkout -b update/pre-commit-hooks-${sgt_datetime}
-        git add .
-        git commit -m "chore: update pre-commit hooks"
-        git push origin update/pre-commit-hooks-${sgt_datetime}
-        gh pr create --base "main" \
-        --title "Test" \
-        --body "sample pr trigger" 
+    - uses: peter-evans/create-pull-request@v5
+      id: cpr
+      with:
+        token: ${{ inputs.GITHUB_TOKEN }}
+        branch: update/pre-commit-hooks
+        title: Update pre-commit hooks
+        commit-message: "chore: update pre-commit hooks"
+        body: Update versions of pre-commit hooks to latest version.
 
-        
+     - name: Close and reopen PR for CI check trigger
+       if: ${{ steps.cpr.outputs.pull-request-number }}
+       run: |
+         gh pr close ${{ steps.cpr.outputs.pull-request-number }}
+         gh pr reopen ${{ steps.cpr.outputs.pull-request-number }}
 
-    # - uses: peter-evans/create-pull-request@v5
-    #   with:
-    #     token: ${{ inputs.GITHUB_TOKEN }}
-    #     branch: update/pre-commit-hooks
-    #     title: Update pre-commit hooks
-    #     commit-message: "chore: update pre-commit hooks"
-    #     body: Update versions of pre-commit hooks to latest version.
