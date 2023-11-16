@@ -37,6 +37,8 @@ runs:
     - name: Close and reopen PR for CI check trigger
       if: ${{ steps.cpr.outputs.pull-request-number }}
       shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         gh pr close ${{ steps.cpr.outputs.pull-request-number }}
         gh pr reopen ${{ steps.cpr.outputs.pull-request-number }}
