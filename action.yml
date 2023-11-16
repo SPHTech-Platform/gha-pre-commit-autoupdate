@@ -30,16 +30,21 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
-        utc_datetime=$(date +'%Y%m%d-%H%M%S')
-        sgt_datetime=$(date -d "${utc_datetime} UTC" +"%Y%m%d-%H%M%S" --date='+8 hours')
+        # utc_datetime=$(date +'%Y%m%d-%H%M%S')
+        # sgt_datetime=$(date -d "${utc_datetime} UTC" +"%Y%m%d-%H%M%S" --date='+8 hours')
         git config --global user.email "<>"
         git config --global user.name "GitHub Actions Bot"
         git pull
-        git checkout -b update/pre-commit-hooks-${sgt_datetime}
+        git checkout -b update/pre-commit-hooks
+        git pull origin update/pre-commit-hooks
         git add .
         git commit -m "chore: update pre-commit hooks"
-        git push origin update/pre-commit-hooks-${sgt_datetime}
-        gh pr create -f
+        git push origin update/pre-commit-hooks
+        gh pr create --base "main" \
+        --title "Test" \
+        --body "sample pr trigger" \ 
+
+        
 
     # - uses: peter-evans/create-pull-request@v5
     #   with:
