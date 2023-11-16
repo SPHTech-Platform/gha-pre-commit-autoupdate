@@ -36,7 +36,7 @@ runs:
         git config --global user.name "GitHub Actions Bot"
         git pull
         git checkout -b update/pre-commit-hooks
-        git pull origin update/pre-commit-hooks
+        git pull origin update/pre-commit-hooks --rebase
         git add .
         git commit -m "chore: update pre-commit hooks"
         git push origin update/pre-commit-hooks
