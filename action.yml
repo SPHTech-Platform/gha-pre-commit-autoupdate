@@ -14,16 +14,31 @@ runs:
 
     - uses: actions/setup-python@v2
 
+    - name: Install stable version of gh cli
+      uses: sersoft-gmbh/setup-gh-cli-action@v2
+      with:
+        version: stable
+
     - name: Install pre-commit and run autoupdate
       shell: bash
       run: |
         pip install pre-commit
         pre-commit autoupdate
 
-    - uses: peter-evans/create-pull-request@v5
-      with:
-        token: ${{ inputs.GITHUB_TOKEN }}
-        branch: update/pre-commit-hooks
-        title: Update pre-commit hooks
-        commit-message: "chore: update pre-commit hooks"
-        body: Update versions of pre-commit hooks to latest version.
+    - name: Create PR with gh cli
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+      run: |
+        git checkout update/tflint-aws-plugin
+        git add .
+        git commit -m "chore: update tflint aws plugin"
+        gh pr create -f
+
+    # - uses: peter-evans/create-pull-request@v5
+    #   with:
+    #     token: ${{ inputs.GITHUB_TOKEN }}
+    #     branch: update/pre-commit-hooks
+    #     title: Update pre-commit hooks
+    #     commit-message: "chore: update pre-commit hooks"
+    #     body: Update versions of pre-commit hooks to latest version.
