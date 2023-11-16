@@ -30,9 +30,9 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
-        git checkout update/tflint-aws-plugin
+        git checkout update/pre-commit-hooks
         git add .
-        git commit -m "chore: update tflint aws plugin"
+        git commit -m "chore: update pre-commit hooks"
         gh pr create -f
 
     # - uses: peter-evans/create-pull-request@v5
