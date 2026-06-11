@@ -10,17 +10,14 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v2
-
-    - uses: actions/setup-python@v2
-
+    - uses: actions/checkout@v6
+    - uses: actions/setup-python@v6
     - name: Install pre-commit and run autoupdate
       shell: bash
       run: |
         pip install pre-commit
         pre-commit autoupdate
-
-    - uses: peter-evans/create-pull-request@v5
+    - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
       with:
         token: ${{ inputs.GITHUB_TOKEN }}
         branch: update/pre-commit-hooks
